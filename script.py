@@ -27,6 +27,17 @@ def get_driver():
     options.add_argument('--start-maximized')
     options.add_argument('--no-sandbox')  # Für Windows oft hilfreich
     options.add_argument('--disable-dev-shm-usage')  # Vermeidet Crashes
+
+    # Zufälliger User-Agent pro Start
+    user_agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    ]
+    options.add_argument(f'--user-agent={random.choice(user_agents)}')
+
+    # Vollständig neuen Profil-Ordner pro Start (killt Cookies, LocalStorage, reCAPTCHA-History)
+    options.add_argument(f'--user-data-dir=C:\\temp\\chrome-profile-{random.randint(1000,9999)}')
     
     # Für sichtbaren Modus (Debug: Sieh, wie der Bot lädt)
     # options.add_argument('--headless=new')  # ← AUSKOMMENTIERT: Browser sichtbar!
